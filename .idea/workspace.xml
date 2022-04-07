@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5ebbdee6-45e5-49d8-a652-98d7880fbbd7" name="默认的" comment="V1.0 初始化项目框架">
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpc-api/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpc-api/src/main/java/com/coffeerr/HelloObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpc-api/src/main/java/com/coffeerr/HelloService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpc-common/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpc-core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="$USER_HOME$/Apache/apache-maven-3.6.3/repository" />
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+        <option name="userSettingsFile" value="$USER_HOME$/Apache/apache-maven-3.6.3/conf/settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="environmentProperties">
+      <map>
+        <entry key="-Dmaven.multiModuleProjectDirectory" value="$MAVEN_HOME" />
+        <entry key="-Dmaven.wagon.http.ssl.allowall" value="true" />
+        <entry key="-Dmaven.wagon.http.ssl.ignore.validity.dates" value="true" />
+        <entry key="-Dmaven.wagon.http.ssl.insecure" value="true" />
+      </map>
+    </option>
+    <option name="jreName" value="1.8" />
+    <option name="vmOptions" value="-DarchetypeCatalog=internal" />
+  </component>
+  <component name="ProjectId" id="27RphcNXoz8aKVBb5ZjGKw3ms9e" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="新增" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="jdk.selected.JAVA_MODULE" value="1.8" />
+    <property name="project.structure.last.edited" value="模块" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5ebbdee6-45e5-49d8-a652-98d7880fbbd7" name="默认的" comment="" />
+      <created>1649292874074</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1649292874074</updated>
+      <workItem from="1649292875998" duration="1073000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="V1.0 初始化项目框架" />
+    <option name="LAST_COMMIT_MESSAGE" value="V1.0 初始化项目框架" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="724" y="206" key="#项目结构" timestamp="1649293490018">
+      <screen x="45" y="23" width="1875" height="1057" />
+    </state>
+    <state x="724" y="206" key="#项目结构/45.23.1875.1057@45.23.1875.1057" timestamp="1649293490018" />
+    <state x="883" y="138" key="CommitChangelistDialog2" timestamp="1649293872459">
+      <screen x="45" y="23" width="1875" height="1057" />
+    </state>
+    <state x="883" y="138" key="CommitChangelistDialog2/45.23.1875.1057@45.23.1875.1057" timestamp="1649293872459" />
+    <state x="738" y="206" key="SettingsEditor" timestamp="1649293938202">
+      <screen x="45" y="23" width="1875" height="1057" />
+    </state>
+    <state x="738" y="206" key="SettingsEditor/45.23.1875.1057@45.23.1875.1057" timestamp="1649293938202" />
+    <state x="508" y="300" key="new project wizard" timestamp="1649293462527">
+      <screen x="45" y="23" width="1875" height="1057" />
+    </state>
+    <state x="508" y="300" key="new project wizard/45.23.1875.1057@45.23.1875.1057" timestamp="1649293462527" />
+  </component>
+</project>
