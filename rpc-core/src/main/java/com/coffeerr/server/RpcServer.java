@@ -36,12 +36,7 @@ public class RpcServer {
                 logger.info("接收到地址:" + socket.getLocalSocketAddress() + "/" + socket.getLocalPort());
                 //do sth
                 final Socket finalSocket = socket;
-                threadPoolExecutor.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        handleRequest(service, finalSocket);
-                    }
-                });
+                threadPoolExecutor.execute(new HandlerThread(service, socket));
             }
 
         } catch (IOException e) {
@@ -49,20 +44,5 @@ public class RpcServer {
         }
     }
 
-    public static void handleRequest(Object service, Socket socket) {
-        try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            RpcRequest rpcRequest = (RpcRequest) objectInputStream.readObject();
-            logger.info("接收到客户端信息：" + rpcRequest.toString());
 
-            Method method = service.getClass().getMethod(rpcRequest.getMethodName(), rpcRequest.getParameterType());
-            Object res = method.invoke(service, rpcRequest.getParameters());
-
-            objectOutputStream.writeObject(RpcResponse.success(res));
-            objectOutputStream.flush();
-        } catch (IOException | ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            logger.error("" + e);
-        }
-    }
 }
