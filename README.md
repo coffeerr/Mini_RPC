@@ -30,14 +30,21 @@
 #### 难点：
 
 1、客户端，如何通过动态代理实现方法调用？
+
+
+
+2、服务端，如何根据传过来的RpcRequest调用对应的方法？
+
 ```java
 Method method = service.getClass().getMethod(rpcRequest.getMethodName(), rpcRequest.getParameterType());
 Object res = method.invoke(service, rpcRequest.getParameters());
 ```
 
-2、服务端，如何根据传过来的RpcRequest调用对应的方法？
-
 ### V1.1
 ①、优化服务端实现方式，将线程抽离
 
 ②、引入协议，通过协议进行消息通信
+
+关于协议的设定，参考了[《RPC实战与核心原理》](https://time.geekbang.org/column/article/199651)中的协议设定
+
+即 **｜魔术位 ｜ 长度 ｜ 消息ID ｜ 协议版本 ｜ 消息类型 ｜ 序列化方式｜数据｜ **的表示方式。 

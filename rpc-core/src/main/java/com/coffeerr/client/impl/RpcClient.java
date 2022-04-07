@@ -1,7 +1,7 @@
-package com.coffeerr.client;
+package com.coffeerr.client.impl;
 
+import com.coffeerr.client.RpcClientService;
 import com.coffeerr.request.RpcRequest;
-import com.coffeerr.respose.RpcResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,15 +9,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 /**
- * @description:
- * @author: Desmand
+ * @description: 简单传输
+ * @author: Desmond
  * @time: 2022/4/7 2:04 下午
  */
 
-public class RpcClient {
+public class RpcClient implements RpcClientService {
     private static final Logger logger = LoggerFactory.getLogger(RpcClient.class);
 
     /**
@@ -26,7 +25,8 @@ public class RpcClient {
      * @param rpcRequest
      * @return
      */
-    public Object sendRequest(RpcRequest rpcRequest, int port, String host) {
+    @Override
+    public Object sendRequest(RpcRequest rpcRequest, String host, int port) {
         Object res = null;
         try (Socket socket = new Socket(host, port)) {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());

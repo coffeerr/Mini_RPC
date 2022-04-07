@@ -1,5 +1,6 @@
 package com.coffeerr.client;
 
+import com.coffeerr.client.impl.RpcClient;
 import com.coffeerr.request.RpcRequest;
 import com.coffeerr.respose.RpcResponse;
 import lombok.AllArgsConstructor;
@@ -36,7 +37,7 @@ public class RpcClientProxy implements InvocationHandler {
                 .parameterType(method.getParameterTypes())
                 .build();
         RpcClient rpcClient = new RpcClient();
-        return ((RpcResponse) rpcClient.sendRequest(rpcRequest, port, host)).getData();
+        return ((RpcResponse) rpcClient.sendRequest(rpcRequest, host, port)).getData();
     }
 
 
