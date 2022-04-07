@@ -2,6 +2,7 @@ package com.coffeerr.server;
 
 import com.coffeerr.request.RpcRequest;
 import com.coffeerr.respose.RpcResponse;
+import com.coffeerr.server.impl.RpcServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.slf4j.Logger;
@@ -29,17 +30,7 @@ public class HandlerThread implements Runnable {
 
     @Override
     public void run() {
-        try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            RpcRequest rpcRequest = (RpcRequest) objectInputStream.readObject();
-            logger.info("接收到客户端信息：" + rpcRequest.toString());
-            Method method = service.getClass().getMethod(rpcRequest.getMethodName(), rpcRequest.getParameterType());
-            Object res = method.invoke(service, rpcRequest.getParameters());
-            objectOutputStream.writeObject(RpcResponse.success(res));
-            objectOutputStream.flush();
-        } catch (IOException | ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            logger.error("" + e);
-        }
+        RpcServerService rpcServerService = new RpcServiceImpl();
+        rpcServerService.threadHandler(socket, service);
     }
 }

@@ -15,4 +15,13 @@ public class DataTransportUtils {
         res[0] = (byte) (num & 0xEF);
         return res;
     }
+
+    public static int byteArrayConvertInt(byte[] src) {
+        int value;
+        value = ((src[0] & 0xFF) << 24)
+                | ((src[1] & 0xFF) << 16)
+                | ((src[2] & 0xFF) << 8)
+                | (src[3] & 0xFF);
+        return value;
+    }
 }

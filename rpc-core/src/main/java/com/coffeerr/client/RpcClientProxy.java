@@ -36,7 +36,7 @@ public class RpcClientProxy implements InvocationHandler {
                 .parameters(args)
                 .parameterType(method.getParameterTypes())
                 .build();
-        RpcClient rpcClient = new RpcClient();
+        RpcClientService rpcClient = new RpcClient();
         return ((RpcResponse) rpcClient.sendRequest(rpcRequest, host, port)).getData();
     }
 
