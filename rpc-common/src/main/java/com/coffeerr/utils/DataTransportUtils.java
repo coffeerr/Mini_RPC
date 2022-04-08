@@ -8,12 +8,12 @@ package com.coffeerr.utils;
 
 public class DataTransportUtils {
     public static byte[] intConverteByteArray(int num) {
-        byte[] res = new byte[4];
-        res[0] = (byte) ((num >> 24) & 0xEF);
-        res[0] = (byte) ((num >> 16) & 0xEF);
-        res[0] = (byte) ((num >> 8) & 0xEF);
-        res[0] = (byte) (num & 0xEF);
-        return res;
+        byte[] src = new byte[4];
+        src[0] = (byte) ((num >> 24) & 0xFF);
+        src[1] = (byte) ((num >> 16) & 0xFF);
+        src[2] = (byte) ((num >> 8) & 0xFF);
+        src[3] = (byte) (num & 0xFF);
+        return src;
     }
 
     public static int byteArrayConvertInt(byte[] src) {

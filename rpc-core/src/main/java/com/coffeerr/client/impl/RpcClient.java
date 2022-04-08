@@ -2,6 +2,7 @@ package com.coffeerr.client.impl;
 
 import com.coffeerr.client.RpcClientService;
 import com.coffeerr.request.RpcRequest;
+import com.coffeerr.serialize.CommonSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +27,7 @@ public class RpcClient implements RpcClientService {
      * @return
      */
     @Override
-    public Object sendRequest(RpcRequest rpcRequest, String host, int port) {
+    public Object sendRequest(RpcRequest rpcRequest, String host, int port, CommonSerializer serializer) {
         Object res = null;
         try (Socket socket = new Socket(host, port)) {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());

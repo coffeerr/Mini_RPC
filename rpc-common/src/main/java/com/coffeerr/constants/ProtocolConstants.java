@@ -9,5 +9,5 @@ package com.coffeerr.constants;
 public class ProtocolConstants {
     public static final int INIT_VERSION = 1;
 
-    public static final int MAGIC_NUMBER = 0x08;
+    public static final int MAGIC_NUMBER = 0xCAFEBABE;
 }

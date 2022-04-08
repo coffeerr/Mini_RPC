@@ -1,6 +1,8 @@
 package com.coffeerr.server;
 
 import com.coffeerr.HelloService;
+import com.coffeerr.registry.ServiceRegistry;
+import com.coffeerr.registry.impl.ServiceRegistryImpl;
 import com.coffeerr.server.impl.HelloServiceImpl;
 
 /**
@@ -11,8 +13,11 @@ import com.coffeerr.server.impl.HelloServiceImpl;
 
 public class TestServer {
     public static void main(String[] args) {
-        RpcServer rpcServer = new RpcServer();
         HelloService helloService = new HelloServiceImpl();
-        rpcServer.register(helloService, 8097);
+        ServiceRegistry serviceRegistry = new ServiceRegistryImpl();
+        serviceRegistry.register(helloService);
+
+        RpcServer rpcServer = new RpcServer(serviceRegistry);
+        rpcServer.start(8097);
     }
 }

@@ -1,6 +1,7 @@
 package com.coffeerr.client;
 
 import com.coffeerr.request.RpcRequest;
+import com.coffeerr.serialize.CommonSerializer;
 
 /**
  * @description:
@@ -17,5 +18,5 @@ public interface RpcClientService {
      * @param port
      * @return
      */
-    Object sendRequest(RpcRequest rpcRequest, String host, int port);
+    Object sendRequest(RpcRequest rpcRequest, String host, int port, CommonSerializer serializer);
 }

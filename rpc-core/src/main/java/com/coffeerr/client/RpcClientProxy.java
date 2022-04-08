@@ -1,8 +1,10 @@
 package com.coffeerr.client;
 
 import com.coffeerr.client.impl.RpcClient;
+import com.coffeerr.client.impl.RpcClientProtocolHandler;
 import com.coffeerr.request.RpcRequest;
 import com.coffeerr.respose.RpcResponse;
+import com.coffeerr.serialize.CommonSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -22,6 +24,7 @@ import java.lang.reflect.Proxy;
 public class RpcClientProxy implements InvocationHandler {
     private int port;
     private String host;
+    private CommonSerializer serializer;
 
 
     public <T> T getProxy(Class<T> clazz) {
@@ -36,8 +39,8 @@ public class RpcClientProxy implements InvocationHandler {
                 .parameters(args)
                 .parameterType(method.getParameterTypes())
                 .build();
-        RpcClientService rpcClient = new RpcClient();
-        return ((RpcResponse) rpcClient.sendRequest(rpcRequest, host, port)).getData();
+        RpcClientService rpcClient = new RpcClientProtocolHandler();
+        return rpcClient.sendRequest(rpcRequest, host, port, serializer);
     }
 
 

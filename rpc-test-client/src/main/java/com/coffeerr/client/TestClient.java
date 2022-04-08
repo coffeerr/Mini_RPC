@@ -3,6 +3,8 @@ package com.coffeerr.client;
 import com.coffeerr.HelloObject;
 import com.coffeerr.HelloService;
 import com.coffeerr.respose.RpcResponse;
+import com.coffeerr.serialize.CommonSerializer;
+import com.coffeerr.serialize.impl.Json2Serializer;
 
 import java.lang.reflect.Proxy;
 
@@ -17,7 +19,8 @@ public class TestClient {
         String host = "127.0.0.1";
         int port = 8097;
 
-        RpcClientProxy rpcClientProxy = new RpcClientProxy(port, host);
+        CommonSerializer serializer = new Json2Serializer();
+        RpcClientProxy rpcClientProxy = new RpcClientProxy(port, host, serializer);
         HelloService helloService = rpcClientProxy.getProxy(HelloService.class);
 
         HelloObject helloObject = new HelloObject(407, "来自客户端的问候");
