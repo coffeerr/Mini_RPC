@@ -23,4 +23,8 @@
 hs_err_pid*
 
 #idea files
-*.imp
+*.iml
+.idea/
+target/
+/assets
+
