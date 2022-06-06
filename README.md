@@ -51,4 +51,3 @@ Object res = method.invoke(service, rpcRequest.getParameters());
 
 ①、服务端：利用容器存储服务，可满足同时注册多个服务
 
-①、socket -》 Netty

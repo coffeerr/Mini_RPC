@@ -36,7 +36,7 @@ public class RpcServerProtocolHandler implements RpcServerService {
 
 
             byte[] bytes = new byte[4];
-            // ｜魔术位 ｜ 长度 ｜ 消息ID ｜ 协议版本 ｜ 消息类型 ｜ 序列化方式｜数据｜
+            // ｜ 魔术位 ｜ 长度 ｜ 消息ID ｜ 协议版本 ｜ 消息类型 ｜ 序列化方式｜数据｜
             objectInputStream.read(bytes);
             int magic = DataTransportUtils.byteArrayConvertInt(bytes);
             if (magic != ProtocolConstants.MAGIC_NUMBER) {
