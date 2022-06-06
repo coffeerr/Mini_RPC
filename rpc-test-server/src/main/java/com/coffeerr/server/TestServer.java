@@ -31,4 +31,14 @@ public class TestServer {
         RpcServer rpcServer = new RpcServer(serviceRegistry);
         rpcServer.start(8097);
     }
+
+    @Test
+    @DisplayName("NettyServer")
+    public void testNettyServer() {
+        HelloService helloService = new HelloServiceImpl();
+        ServiceRegistry serviceRegistry = new ServiceRegistryImpl();
+        serviceRegistry.register(helloService);
+        NettyServer server = new NettyServer();
+        server.start(9999);
+    }
 }

@@ -5,6 +5,7 @@ import com.coffeerr.client.impl.RpcClientProtocolHandler;
 import com.coffeerr.request.RpcRequest;
 import com.coffeerr.respose.RpcResponse;
 import com.coffeerr.serialize.CommonSerializer;
+import com.coffeerr.server.NettyServer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -39,8 +40,11 @@ public class RpcClientProxy implements InvocationHandler {
                 .parameters(args)
                 .parameterType(method.getParameterTypes())
                 .build();
-        RpcClientService rpcClient = new RpcClientProtocolHandler();
-        return rpcClient.sendRequest(rpcRequest, host, port, serializer);
+//        RpcClientService rpcClient = new RpcClientProtocolHandler();
+//        return rpcClient.sendRequest(rpcRequest, host, port, serializer);
+        //使用Netty传输信息
+        NettyClient nettyClient = new NettyClient(host, port);
+        return nettyClient.sendRequest(rpcRequest);
     }
 
 

@@ -15,6 +15,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HelloObject implements Serializable {
-    private Integer ID;
+    private Integer id;
     private String message;
 }

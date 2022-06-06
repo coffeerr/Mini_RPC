@@ -41,4 +41,24 @@ public class TestClient {
         String morningHello = morningService.hello(morningHelloObject);
         Assertions.assertEquals(morningHello, "来自服务端的招手");
     }
+
+    @Test
+    @DisplayName("Netty客户端")
+    public void testNettyClient() {
+        String host = "127.0.0.1";
+        int port = 9999;
+        CommonSerializer serializer = new Json2Serializer();
+        RpcClientProxy rpcClientProxy = new RpcClientProxy(port, host, serializer);
+        HelloService helloService = rpcClientProxy.getProxy(HelloService.class);
+        HelloObject helloObject = new HelloObject(407, "helloService:来自客户端的问候");
+        HelloObject morningHelloObject = new HelloObject(407, "morningHelloService:来自客户端的问候");
+
+        MorningService morningService = rpcClientProxy.getProxy(MorningService.class);
+
+        String hello = helloService.hello(helloObject);
+        Assertions.assertEquals(hello, "来自服务端的招手");
+
+//        String morningHello = morningService.hello(morningHelloObject);
+//        Assertions.assertEquals(morningHello, "来自服务端的招手");
+    }
 }

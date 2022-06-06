@@ -66,21 +66,5 @@ public class RpcServer {
         }
     }
 
-//    public void register(final Object service, int port) {
-//        logger.info("server 启动");
-//        Socket socket;
-//        try (ServerSocket serverSocket = new ServerSocket(port)) {
-//            while ((socket = serverSocket.accept()) != null) {
-//                logger.info("接收到地址:" + socket.getLocalSocketAddress() + "/" + socket.getLocalPort());
-//                //do sth
-//                final Socket finalSocket = socket;
-//                threadPoolExecutor.execute(new HandlerThread(socket, serviceRegistry));
-//            }
-//
-//        } catch (IOException e) {
-//            logger.error("" + e);
-//        }
-//    }
-
 
 }
