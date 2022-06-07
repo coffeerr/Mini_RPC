@@ -1,6 +1,7 @@
 package com.coffeerr.codec;
 
 import com.coffeerr.constants.PackageType;
+import com.coffeerr.constants.SerializeCode;
 import com.coffeerr.request.RpcRequest;
 import com.coffeerr.serialize.CommonSerializer;
 import io.netty.buffer.ByteBuf;
@@ -29,7 +30,7 @@ public class CommonEncoder extends MessageToByteEncoder {
         } else {
             out.writeInt(PackageType.RESPONSE_PACK.getPackageCode());
         }
-        out.writeInt(1);
+        out.writeInt(SerializeCode.KRYO.getCode());
         byte[] bytes = commonSerializer.serialize(object);
         out.writeInt(bytes.length);
         out.writeBytes(bytes);

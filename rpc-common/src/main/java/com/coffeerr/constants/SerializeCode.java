@@ -11,8 +11,9 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum SerializerCode {
+public enum SerializeCode {
     DEFAULT(0),
-    JSON(1);
+    JSON(1),
+    KRYO(2);
     private int code;
 }

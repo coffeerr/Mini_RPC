@@ -1,7 +1,6 @@
 package com.coffeerr.serialize.impl;
 
 import com.coffeerr.constants.RpcError;
-import com.coffeerr.constants.SerializerCode;
 import com.coffeerr.exception.RpcException;
 import com.coffeerr.request.RpcRequest;
 import com.coffeerr.serialize.CommonSerializer;
@@ -45,6 +44,11 @@ public class Json2Serializer implements CommonSerializer {
             logger.error("反序列化时有错误发生：{}", e.getMessage());
             throw new RpcException(RpcError.DESERIALIZE_ERROR);
         }
+    }
+
+    @Override
+    public int getCode() {
+        return 1;
     }
 
     /**

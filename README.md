@@ -53,3 +53,8 @@ Object res = method.invoke(service, rpcRequest.getParameters());
 ①、Netty：引入Netty，利用Netty替代Socket实现网络传输。
 ②、扩充序列化协议：Kryo
 
+##GTD
+### V1.4
+①、使用Nacos作为注册中心
+②、支持更多的序列化协议
+

@@ -5,6 +5,7 @@ import com.coffeerr.codec.CommonEncoder;
 import com.coffeerr.request.RpcRequest;
 import com.coffeerr.respose.RpcResponse;
 import com.coffeerr.serialize.impl.JsonSerializer;
+import com.coffeerr.serialize.impl.KryoSerializer;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -44,7 +45,7 @@ public class NettyClient {
                     protected void initChannel(SocketChannel ch) throws Exception {
                         ChannelPipeline pipeline = ch.pipeline();
                         pipeline.addLast(new CommonDecoder())
-                                .addLast(new CommonEncoder(new JsonSerializer()))
+                                .addLast(new CommonEncoder(new KryoSerializer()))
                                 .addLast(new NettyClientHandler());
                     }
                 });

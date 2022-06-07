@@ -44,7 +44,7 @@ public class CommonDecoder extends ReplayingDecoder {
             throw new RpcException(RpcError.PROTOCOL_VERSION_ERROR);
         }
         int serializerCode = in.readInt();
-        CommonSerializer serializer = new Json2Serializer();
+        CommonSerializer serializer = CommonSerializer.getSerializeByCode(serializerCode);
         if (serializer == null) {
             logger.error("不识别的反序列化器：{}", serializerCode);
             throw new RpcException(RpcError.PROTOCOL_VERSION_ERROR);

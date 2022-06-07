@@ -1,14 +1,16 @@
 package com.coffeerr.serialize;
 
 import com.coffeerr.serialize.impl.JsonSerializer;
+import com.coffeerr.serialize.impl.KryoSerializer;
 
 public interface CommonSerializer {
     // 默认
 
     static CommonSerializer getSerializeByCode(int code) {
         switch (code) {
+            case 2:
+                return new KryoSerializer();
             case 1:
-                return new JsonSerializer();
             default:
                 return new JsonSerializer();
         }
@@ -18,4 +20,6 @@ public interface CommonSerializer {
     byte[] serialize(Object object);
 
     Object deserialize(byte[] bytes, Class<?> clazz);
+
+    int getCode();
 }

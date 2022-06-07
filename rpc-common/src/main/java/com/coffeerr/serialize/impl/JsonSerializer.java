@@ -1,6 +1,7 @@
 package com.coffeerr.serialize.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.coffeerr.constants.SerializeCode;
 import com.coffeerr.serialize.CommonSerializer;
 
 /**
@@ -16,5 +17,10 @@ public class JsonSerializer implements CommonSerializer {
 
     public Object deserialize(byte[] bytes, Class<?> clazz) {
         return JSON.parseObject(bytes, clazz);
+    }
+
+    @Override
+    public int getCode() {
+        return SerializeCode.JSON.getCode();
     }
 }
