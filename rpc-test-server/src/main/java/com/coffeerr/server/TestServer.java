@@ -1,5 +1,6 @@
 package com.coffeerr.server;
 
+import com.alibaba.nacos.api.exception.NacosException;
 import com.coffeerr.HelloService;
 import com.coffeerr.MorningService;
 import com.coffeerr.registry.ServiceRegistry;
@@ -34,7 +35,7 @@ public class TestServer {
 
     @Test
     @DisplayName("NettyServer")
-    public void testNettyServer() {
+    public void testNettyServer() throws NacosException {
         HelloService helloService = new HelloServiceImpl();
         ServiceRegistry serviceRegistry = new ServiceRegistryImpl();
         serviceRegistry.register(helloService);
