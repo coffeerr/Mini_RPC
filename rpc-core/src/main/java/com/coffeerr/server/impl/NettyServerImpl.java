@@ -1,8 +1,16 @@
-package com.coffeerr.server;
+package com.coffeerr.server.impl;
 
 import com.coffeerr.codec.CommonDecoder;
 import com.coffeerr.codec.CommonEncoder;
+import com.coffeerr.hook.ShutDownHook;
+import com.coffeerr.provider.ServiceProvider;
+import com.coffeerr.provider.ServiceProviderImpl;
+import com.coffeerr.registry.ServiceRegistry;
+import com.coffeerr.registry.impl.NacosServiceRegistryImpl;
+import com.coffeerr.serialize.CommonSerializer;
 import com.coffeerr.serialize.impl.KryoSerializer;
+import com.coffeerr.server.CommonServer;
+import com.coffeerr.server.NettyServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -13,17 +21,35 @@ import io.netty.handler.logging.LoggingHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.InetSocketAddress;
 
 /**
  * @description:
  * @author: Desmond
- * @time: 2022/6/6 2:23 下午
+ * @time: 2022/6/28 10:39 AM
  */
 
-public class NettyServer {
+public class NettyServerImpl implements CommonServer {
+    public static final Logger logger = LoggerFactory.getLogger(NettyServerImpl.class);
 
-    private static final Logger logger = LoggerFactory.getLogger(NettyServer.class);
 
+    private CommonSerializer commonSerializer;
+
+    private ServiceProvider serviceProvider;
+
+    private ServiceRegistry serviceRegistry;
+
+    private String host;
+    private int port;
+
+    public NettyServerImpl(String host, int port) {
+        this.serviceProvider = new ServiceProviderImpl();
+        this.host = host;
+        this.port = port;
+        this.serviceRegistry = new NacosServiceRegistryImpl(new InetSocketAddress(host, port));
+    }
+
+    @Override
     public void start(int port) {
         //用于处理客户端新连接的主”线程池“
         EventLoopGroup bossGroup = new NioEventLoopGroup();
@@ -59,6 +85,8 @@ public class NettyServer {
                     });
             //绑定端口，启动Netty，sync()代表阻塞主Server线程，以执行Netty线程，如果不阻塞Netty就直接被下面shutdown了
             ChannelFuture future = serverBootstrap.bind(port).sync();
+            // 服务关闭自定注销服务
+            ShutDownHook.getInstance().addClearAllHook();
             //等确定通道关闭了，关闭future回到主Server线程
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
@@ -70,10 +98,14 @@ public class NettyServer {
         }
     }
 
-    /**
-     *
-     */
-    public void publicService() {
+    @Override
+    public void setSerializer(CommonSerializer commonSerializer) {
+        this.commonSerializer = commonSerializer;
+    }
 
+    @Override
+    public <T> void publishService(T service, Class<T> serviceClass) {
+        serviceRegistry.register(service);
+        serviceProvider.addServiceProvider(service, serviceClass);
     }
 }

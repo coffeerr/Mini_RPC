@@ -1,28 +1,17 @@
 package com.coffeerr.server;
 
-import com.coffeerr.HelloService;
 import com.coffeerr.constants.RpcError;
 import com.coffeerr.exception.RpcException;
 import com.coffeerr.registry.ServiceRegistry;
-import com.coffeerr.registry.impl.ServiceRegistryImpl;
-import com.coffeerr.request.RpcRequest;
-import com.coffeerr.respose.RpcResponse;
 import com.coffeerr.serialize.CommonSerializer;
 import com.coffeerr.serialize.impl.Json2Serializer;
-import com.coffeerr.serialize.impl.JsonSerializer;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Map;
 import java.util.concurrent.*;
 
 /**
@@ -57,7 +46,7 @@ public class RpcServer {
             //当未接收到连接请求时，accept()会一直阻塞
             while ((socket = serverSocket.accept()) != null) {
                 logger.info("客户端连接！{}:{}", socket.getInetAddress(), socket.getPort());
-                threadPoolExecutor.execute(new HandlerThread(socket, serviceRegistry, serializer));
+//                threadPoolExecutor.execute(new HandlerThread(socket, serviceRegistry, serializer));
             }
         } catch (IOException e) {
             logger.info("服务器启动时有错误发生：" + e);

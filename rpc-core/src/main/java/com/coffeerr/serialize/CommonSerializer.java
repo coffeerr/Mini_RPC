@@ -6,7 +6,7 @@ import com.coffeerr.serialize.impl.KryoSerializer;
 public interface CommonSerializer {
     // 默认
 
-    static CommonSerializer getSerializeByCode(int code) {
+    public static CommonSerializer getSerializeByCode(int code) {
         switch (code) {
             case 2:
                 return new KryoSerializer();

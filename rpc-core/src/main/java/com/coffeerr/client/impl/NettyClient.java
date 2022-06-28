@@ -1,9 +1,14 @@
-package com.coffeerr.client;
+package com.coffeerr.client.impl;
 
+import com.coffeerr.client.CommonClient;
+import com.coffeerr.client.NettyClientHandler;
 import com.coffeerr.codec.CommonDecoder;
 import com.coffeerr.codec.CommonEncoder;
+import com.coffeerr.registry.ServiceDiscovery;
+import com.coffeerr.registry.impl.NacosServiceDiscoveryImpl;
 import com.coffeerr.request.RpcRequest;
 import com.coffeerr.respose.RpcResponse;
+import com.coffeerr.serialize.CommonSerializer;
 import com.coffeerr.serialize.impl.KryoSerializer;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -17,20 +22,25 @@ import org.slf4j.LoggerFactory;
 /**
  * @description:
  * @author: Desmond
- * @time: 2022/6/6 4:35 下午
+ * @time: 2022/6/28 10:54 AM
  */
 
-public class NettyClient {
+public class NettyClient implements CommonClient {
 
-    private static final Logger logger = LoggerFactory.getLogger(NettyClient.class);
+    private static final Logger logger = LoggerFactory.getLogger(com.coffeerr.client.NettyClient.class);
 
     private String host;
     private int port;
     private static final Bootstrap bootstrap;
 
+    private CommonSerializer commonSerializer;
+
+    private ServiceDiscovery serviceDiscovery;
+
     public NettyClient(String host, int port) {
         this.host = host;
         this.port = port;
+        this.serviceDiscovery = new NacosServiceDiscoveryImpl();
     }
 
     static {
@@ -50,6 +60,7 @@ public class NettyClient {
                 });
     }
 
+    @Override
     public Object sendRequest(RpcRequest rpcRequest) {
         try {
             ChannelFuture future = bootstrap.connect(host, port).sync();
@@ -75,5 +86,10 @@ public class NettyClient {
             logger.error("发送消息时有错误发生:", e);
         }
         return null;
+    }
+
+    @Override
+    public void setSerializer(CommonSerializer commonSerializer) {
+        this.commonSerializer = commonSerializer;
     }
 }

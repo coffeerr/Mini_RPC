@@ -1,5 +1,7 @@
 package com.coffeerr.server;
 
+import com.coffeerr.provider.ServiceProvider;
+import com.coffeerr.provider.ServiceProviderImpl;
 import com.coffeerr.registry.ServiceRegistry;
 import com.coffeerr.registry.impl.ServiceRegistryImpl;
 import com.coffeerr.request.RpcRequest;
@@ -23,10 +25,10 @@ import java.lang.reflect.Method;
 public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
 
     private static final Logger logger = LoggerFactory.getLogger(NettyServerHandler.class);
-    private static ServiceRegistry serviceRegistry;
+    private static ServiceProvider serviceProvider;
 
     static {
-        serviceRegistry = new ServiceRegistryImpl();
+        serviceProvider = new ServiceProviderImpl();
     }
 
     @Override
@@ -34,7 +36,8 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> 
         try {
             logger.info("服务端接收到请求：{}", rpcRequest);
             String interfaceName = rpcRequest.getInterfaceName();
-            Object service = serviceRegistry.getService(interfaceName);
+//            Object service = serviceRegistry.getService(interfaceName);
+            Object service = serviceProvider.getServiceProvider(interfaceName);
 
             Method method = service.getClass().getMethod(rpcRequest.getMethodName(), rpcRequest.getParameterType());
             Object result = method.invoke(service, rpcRequest.getParameters());

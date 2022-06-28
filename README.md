@@ -54,7 +54,19 @@ Object res = method.invoke(service, rpcRequest.getParameters());
 ②、扩充序列化协议：Kryo
 
 ##GTD
-### V1.4
-①、使用Nacos作为注册中心
-②、支持更多的序列化协议
 
+### V1.4
+
+①、使用Nacos作为注册中心
+②、在服务器注销时自动删除Nacos中的服务
+
+![](https://markdown-image-1257239969.cos.ap-nanjing.myqcloud.com/2022/06/28/16563855392059.png)
+如图所示，在开启服务器和关闭服务器时，查询Nacos的日志，可以发现服务被自动开启、注销
+
+### V1.4.1
+
+①、优化代码，整理结构，需要跑通【Socket】、【Netty】两个测试用例
+
+### V1.4.2
+
+①、增加
