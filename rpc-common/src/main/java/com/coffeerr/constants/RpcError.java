@@ -20,6 +20,7 @@ public enum RpcError {
     SERIALIZE_ERROR("序列化时有错误发生"),
     DESERIALIZE_ERROR("反序列化时有错误发生"),
     PACKAGE_TYPE_ERROR("消息类型错误"),
+    CLIENT_CONNECT_SERVER_FAILURE("客户端连接失败"),
 
     FAILED_TO_CONNECT_TO_SERVICE_REGISTRY("连接到注册中心时发生错误");
 
