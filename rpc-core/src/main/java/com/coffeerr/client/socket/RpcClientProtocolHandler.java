@@ -1,4 +1,4 @@
-package com.coffeerr.client.impl;
+package com.coffeerr.client.socket;
 
 import com.coffeerr.client.RpcClientService;
 import com.coffeerr.constants.RpcError;
@@ -81,7 +81,7 @@ public class RpcClientProtocolHandler implements RpcClientService {
             OutputStream outputStream = socket.getOutputStream();
             InputStream inputStream = socket.getInputStream();
             ObjectWriter.writeObject(outputStream, rpcRequest, serializer);
-            Object obj = ObjectReader.readObject(inputStream);
+            Object obj = ObjectReader.readObject(inputStream, serializer);
             RpcResponse rpcResponse = (RpcResponse) obj;
             return rpcResponse.getData();
         } catch (IOException e) {

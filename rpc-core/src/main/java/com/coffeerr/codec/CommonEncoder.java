@@ -30,7 +30,7 @@ public class CommonEncoder extends MessageToByteEncoder {
         } else {
             out.writeInt(PackageType.RESPONSE_PACK.getPackageCode());
         }
-        out.writeInt(SerializeCode.KRYO.getCode());
+        out.writeInt(commonSerializer.getCode());
         byte[] bytes = commonSerializer.serialize(object);
         out.writeInt(bytes.length);
         out.writeBytes(bytes);

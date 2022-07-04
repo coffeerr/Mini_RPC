@@ -114,7 +114,7 @@ public class HandlerThread implements Runnable {
     public void run() {
         try (InputStream inputStream = socket.getInputStream();
              OutputStream outputStream = socket.getOutputStream()) {
-            RpcRequest rpcRequest = (RpcRequest) ObjectReader.readObject(inputStream);
+            RpcRequest rpcRequest = (RpcRequest) ObjectReader.readObject(inputStream, serializer);
             String interfaceName = rpcRequest.getInterfaceName();
 //            Object service = serviceRegistry.getService(interfaceName);
             Object service = serviceProvider.getServiceProvider(interfaceName);

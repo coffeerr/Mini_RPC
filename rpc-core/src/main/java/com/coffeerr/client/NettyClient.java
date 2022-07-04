@@ -4,6 +4,7 @@ import com.coffeerr.codec.CommonDecoder;
 import com.coffeerr.codec.CommonEncoder;
 import com.coffeerr.request.RpcRequest;
 import com.coffeerr.respose.RpcResponse;
+import com.coffeerr.serialize.CommonSerializer;
 import com.coffeerr.serialize.impl.KryoSerializer;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -28,9 +29,12 @@ public class NettyClient {
     private int port;
     private static final Bootstrap bootstrap;
 
-    public NettyClient(String host, int port) {
+    private static CommonSerializer serializer;
+
+    public NettyClient(String host, int port, CommonSerializer serializer) {
         this.host = host;
         this.port = port;
+        this.serializer = serializer;
     }
 
     static {
@@ -44,7 +48,7 @@ public class NettyClient {
                     protected void initChannel(SocketChannel ch) throws Exception {
                         ChannelPipeline pipeline = ch.pipeline();
                         pipeline.addLast(new CommonDecoder())
-                                .addLast(new CommonEncoder(new KryoSerializer()))
+                                .addLast(new CommonEncoder(serializer))
                                 .addLast(new NettyClientHandler());
                     }
                 });

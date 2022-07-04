@@ -2,6 +2,7 @@ package com.coffeerr.server;
 
 import com.coffeerr.constants.RpcError;
 import com.coffeerr.exception.RpcException;
+import com.coffeerr.provider.ServiceProvider;
 import com.coffeerr.registry.ServiceRegistry;
 import com.coffeerr.serialize.CommonSerializer;
 import com.coffeerr.serialize.impl.Json2Serializer;
@@ -25,14 +26,16 @@ public class RpcServer {
 
     private BlockingQueue<Runnable> blockingQueue;
     private ThreadPoolExecutor threadPoolExecutor;
-    private ServiceRegistry serviceRegistry;
+//    private ServiceRegistry serviceRegistry;
+
+    private ServiceProvider serviceProvider;
     private CommonSerializer serializer;
 
-    public RpcServer(ServiceRegistry serviceRegistry) {
+    public RpcServer(ServiceProvider serviceProvider, CommonSerializer serializer) {
         this.blockingQueue = new ArrayBlockingQueue<>(10);
         this.threadPoolExecutor = new ThreadPoolExecutor(5, 10, 10, TimeUnit.SECONDS, blockingQueue);
-        this.serviceRegistry = serviceRegistry;
-        this.serializer = new Json2Serializer();
+        this.serviceProvider = serviceProvider;
+        this.serializer = serializer;
     }
 
     void start(int port) {
@@ -46,7 +49,7 @@ public class RpcServer {
             //当未接收到连接请求时，accept()会一直阻塞
             while ((socket = serverSocket.accept()) != null) {
                 logger.info("客户端连接！{}:{}", socket.getInetAddress(), socket.getPort());
-//                threadPoolExecutor.execute(new HandlerThread(socket, serviceRegistry, serializer));
+                threadPoolExecutor.execute(new HandlerThread(socket, serviceProvider, serializer));
             }
         } catch (IOException e) {
             logger.info("服务器启动时有错误发生：" + e);
