@@ -17,7 +17,16 @@ import org.junit.jupiter.api.Test;
  */
 
 public class TestClient {
-    public static void main(String[] args) {
+
+    @Test
+    @DisplayName("客户端：Socket注册")
+    public void testSocketClient() {
+        CommonSerializer serializer = CommonSerializer.getSerializeByCode(2);
+        RpcClientProxy rpcClientProxy = new RpcClientProxy(12345, "127.0.0.1", serializer);
+//        RpcClientProtocolHandler rpcClientProtocolHandler = new RpcClientProtocolHandler();
+        HelloService helloService = rpcClientProxy.getProxy(HelloService.class);
+        String hello_socket = helloService.hello(new HelloObject(12, "hello Socket"));
+        System.out.println("hello_socket = " + hello_socket);
     }
 
     @Test
@@ -25,9 +34,10 @@ public class TestClient {
     public void testMultiServiceClient() {
         String host = "127.0.0.1";
         int port = 8097;
-        CommonSerializer serializer = new Json2Serializer();
+        CommonSerializer serializer = CommonSerializer.getSerializeByCode(2);
         RpcClientProxy rpcClientProxy = new RpcClientProxy(port, host, serializer);
         HelloService helloService = rpcClientProxy.getProxy(HelloService.class);
+
         HelloObject helloObject = new HelloObject(407, "helloService:来自客户端的问候");
         HelloObject morningHelloObject = new HelloObject(407, "morningHelloService:来自客户端的问候");
 
@@ -60,10 +70,7 @@ public class TestClient {
     @Test
     @DisplayName("Client:引入Nacos作为注册中心")
     public void testNettyClientNacos() {
-        CommonSerializer serializer = CommonSerializer.getSerializeByCode(2);
-        CommonClient nettyClient = new NettyClient("127.0.0.1", 13110);
-
-
+        CommonSerializer serializer = CommonSerializer.getSerializeByCode(4);
         RpcClientProxy rpcClientProxy = new RpcClientProxy(13110, "127.0.0.1", serializer);
         HelloService helloService = rpcClientProxy.getProxy(HelloService.class);
         HelloObject helloObject = new HelloObject(407, "helloService:来自客户端的问候");

@@ -66,7 +66,4 @@ Object res = method.invoke(service, rpcRequest.getParameters());
 ### V1.4.1
 
 ①、优化代码，整理结构，需要跑通【Socket】、【Netty】两个测试用例
-
-### V1.4.2
-
-①、增加
+②、支持Hessian、Protostuff序列化器

@@ -18,7 +18,8 @@ public class ObjectReader {
     private static final Logger logger = LoggerFactory.getLogger(ObjectReader.class);
     private static final int MAGIC_NUMBER = 0xCAFEBABE;
 
-    public static Object readObject(InputStream in) throws IOException {
+
+    public static Object readObject(InputStream in, CommonSerializer serializer) throws IOException {
         byte[] numberBytes = new byte[4];
         in.read(numberBytes);
         int magic = bytesToInt(numberBytes);
@@ -39,7 +40,7 @@ public class ObjectReader {
         }
         in.read(numberBytes);
         int serializerCode = bytesToInt(numberBytes);
-        CommonSerializer serializer = new Json2Serializer();
+        logger.info("序列化器件为" + CommonSerializer.getSerializeByCode(serializerCode));
         if (serializer == null) {
             logger.error("不识别的反序列化器：{}", serializerCode);
             throw new RpcException(RpcError.PROTOCOL_VERSION_ERROR);
